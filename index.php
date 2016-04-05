@@ -29,7 +29,15 @@
     </div>
       <div class="CajaEnunciado animated bounceInLeft">
       <h2>autos:</h2>
-   
+      <?php 
+        $archivo=fopen("Ticket.txt", "r");
+        while (!feof($archivo)) {
+          $linea=fgets($archivo);
+          $auto=explode('|', $linea);
+          echo "<br>".$auto[0];
+        }
+        fclose($archivo);
+       ?>
       
       
     </div>

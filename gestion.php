@@ -31,6 +31,7 @@ if ($accion=="ingreso") {
 		$listaDeAutos[]=$auto;
 	}
 	var_dump($listaDeAutos);
+	fclose($archivo);
 }
 ?>
 <br>
