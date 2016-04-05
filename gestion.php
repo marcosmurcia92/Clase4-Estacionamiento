@@ -15,10 +15,14 @@
 //var_dump($_POST['estacionar']);
 $accion=$_POST['estacionar'];
 $patente=$_POST["patente"];
+$ahora=date("Y-M-d h:i:s");
+
 if ($accion=="ingreso") {
 	echo "Se guardo la patente ".$patente;
+	$archivo=fopen("Ticket.txt", "a");
+	fwrite($archivo, $patente."|".$ahora."\n");
+	fclose($archivo);
 }
-
 ?>
 <br>
 <br>
