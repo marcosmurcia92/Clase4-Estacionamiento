@@ -28,10 +28,38 @@ if ($accion=="ingreso") {
 	while (!feof($archivo)) {
 		$linea=fgets($archivo);
 		$auto=explode('|', $linea);
-		$listaDeAutos[]=$auto;
+		if ($auto[0]!="") {
+			$listaDeAutos[]=$auto;
+		}
 	}
-	var_dump($listaDeAutos);
 	fclose($archivo);
+	//var_dump($listaDeAutos);
+	$esta=false;
+	$precio=0;
+	foreach ($listaDeAutos as $auto) {
+		//echo $auto[0]."<br>";
+		if ($auto[0]==$patente) {
+			$esta=true;
+			$fechainicio = $auto[1];
+			$diferencia=strtotime($ahora)-strtotime($fechainicio);
+			echo "El tiempo transcurrido es ".$diferencia." segundos.<br>";
+		}
+	}
+
+	if ($esta) {
+		$precio= 20*$diferencia;
+		echo "Esta el auto <br>Debe abonar: $".$precio;
+		$archivo=fopen("Ticket.txt", "w");
+		foreach ($listaDeAutos as $auto) {
+			//echo $auto[0]."<br>";
+			if ($auto[0]!=$patente) {
+				fwrite($archivo, $auto[0]."|".$auto[1]);
+			}
+		}
+		fclose($archivo);
+	}else{
+		echo "No esta el auto";
+	}
 }
 ?>
 <br>
